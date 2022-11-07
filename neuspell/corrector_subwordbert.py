@@ -21,7 +21,7 @@ class BertChecker(Corrector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.bert_pretrained_name_or_path = "/content/neuspell/data/checkpoints/SinBERT_large" # need to change this to SinBERT_large_2
+        self.bert_pretrained_name_or_path =  "bert-base-cased" # need to change this to SinBERT_large_2
 
     def load_model(self, ckpt_path):
         print(f"initializing model")

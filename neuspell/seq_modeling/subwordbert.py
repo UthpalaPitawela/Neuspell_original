@@ -7,12 +7,12 @@ from .models import SubwordBert
 from transformers import AutoModelForMaskedLM
 
 
-def load_model(vocab, bert_pretrained_name_or_path="/content/neuspell/data/checkpoints/SinBERT_large", verbose=False):
+def load_model(vocab, bert_pretrained_name_or_path="bert-base-cased", verbose=False):
     # model = SubwordBert(vocab["token2idx"][vocab["pad_token"]],
     #                     len(vocab["token_freq"]),
     #                     bert_pretrained_name_or_path=bert_pretrained_name_or_path)
     print("Before loading the model")
-    model = AutoModelForMaskedLM.from_pretrained("/content/neuspell/data/checkpoints/SinBERT_large")
+    model = AutoModelForMaskedLM.from_pretrained("bert-base-cased")
     print(model)
     if verbose:
         print(model)
@@ -81,7 +81,7 @@ def model_predictions(model, data, vocab, device, batch_size=16):
     for batch_id, (batch_labels, batch_sentences) in enumerate(data_iter):
         # set batch data for bert
         batch_labels_, batch_sentences_, batch_bert_inp, batch_bert_splits = bert_tokenize_for_valid_examples(
-            batch_labels, batch_sentences, "/content/neuspell/data/checkpoints/SinBERT_large" )
+            batch_labels, batch_sentences, "bert-base-cased")
         if len(batch_labels_) == 0:
             print("################")
             print("Not predicting the following lines due to pre-processing mismatch: \n")
@@ -131,7 +131,7 @@ def model_inference(model, data, topk, device, batch_size=16, vocab_=None):
         st_time = time.time()
         # set batch data for bert
         batch_labels_, batch_sentences_, batch_bert_inp, batch_bert_splits = bert_tokenize_for_valid_examples(
-            batch_labels, batch_sentences, "/content/neuspell/data/checkpoints/SinBERT_large")
+            batch_labels, batch_sentences, "bert-base-cased")
         if len(batch_labels_) == 0:
             print("Not predicting the following lines due to pre-processing mismatch: \n")
             print([(a, b) for a, b in zip(batch_labels, batch_sentences)])

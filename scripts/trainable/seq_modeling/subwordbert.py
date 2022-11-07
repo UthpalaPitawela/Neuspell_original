@@ -101,7 +101,7 @@ def model_predictions(model, data, vocab, DEVICE, BATCH_SIZE=16):
     model.to(DEVICE)
     for batch_id, (batch_labels,batch_sentences) in enumerate(data_iter):
         # set batch data for bert
-        batch_labels_, batch_sentences_, batch_bert_inp, batch_bert_splits = bert_tokenize_for_valid_examples(batch_labels,batch_sentences, "/content/neuspell/data/checkpoints/SinBERT_large")
+        batch_labels_, batch_sentences_, batch_bert_inp, batch_bert_splits = bert_tokenize_for_valid_examples(batch_labels,batch_sentences, "bert-base-cased")
         if len(batch_labels_)==0:
             print("################")
             print("Not predicting the following lines due to pre-processing mismatch: \n")
